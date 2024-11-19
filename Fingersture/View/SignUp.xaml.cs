@@ -11,7 +11,7 @@ public partial class SignUp : ContentPage
         dbService = DatabaseService.Instance;
     }
 
-    private async Task<string> PickImageAsync()
+    private static async Task<string> PickImageAsync()
     {
         try
         {
@@ -46,15 +46,15 @@ public partial class SignUp : ContentPage
 
     private void ValidateForm()
     {
-        ButtonCadastrar.IsEnabled = !string.IsNullOrEmpty(EntryNome.Text) &&
-                                    CargoPicker.SelectedItem != null &&
+        registerButton.IsEnabled = !string.IsNullOrEmpty(EntryNome.Text) &&
+                                    positionPicker.SelectedItem != null &&
                                     !string.IsNullOrEmpty(imagePath1);
     }
 
     private async void HandleAddFingerPrint(object sender, EventArgs e)
     {
         string nome = EntryNome.Text;
-        string cargo = CargoPicker.SelectedItem?.ToString();
+        string cargo = positionPicker.SelectedItem?.ToString();
 
         if (string.IsNullOrEmpty(imagePath1))
         {

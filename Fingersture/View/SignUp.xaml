@@ -58,7 +58,6 @@
                    MaximumWidthRequest="500" />
 
                 <Frame
-                   x:Name="frameNome"
                    HasShadow="False"
                    BorderColor="Transparent"
                    CornerRadius="5"
@@ -76,7 +75,6 @@
                 </Frame>
 
                 <Label
-                   x:Name="labelPicker"
                    Text="Select your position"
                    FontSize="24"
                    FontAttributes="Bold"
@@ -86,7 +84,6 @@
 
 
                 <Frame
-                   x:Name="framePicker"
                    HasShadow="False"
                    BorderColor="Transparent"
                    CornerRadius="5"
@@ -97,7 +94,7 @@
                    MaximumWidthRequest="500">
 
                     <Picker
-                        x:Name="CargoPicker"
+                        x:Name="positionPicker"
                         FontSize="20"
                         Grid.Column="1"
                         TextColor="Black"
@@ -115,7 +112,6 @@
                 </Frame>
 
                 <Button
-                    x:Name="ButtonAdicionar"
                     Text="Add fingerprint"
                     Clicked="HandleImageSelection"
                     BackgroundColor="#FF2E63"
@@ -126,7 +122,7 @@
                     MaximumWidthRequest="500" />
 
                 <Button
-                    x:Name="ButtonCadastrar"
+                    x:Name="registerButton"
                     Text="Sign Up"
                     Clicked="HandleAddFingerPrint"
                     IsEnabled="False"
@@ -144,7 +140,7 @@
                                 Value="#555" />
                             <Style.Triggers>
                                 <DataTrigger TargetType="Button"
-                                     Binding="{Binding IsEnabled, Source={x:Reference ButtonCadastrar}}"
+                                     Binding="{Binding IsEnabled, Source={x:Reference registerButton}}"
                                      Value="True">
                                     <Setter 
                                         Property="BackgroundColor"

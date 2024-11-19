@@ -9,24 +9,22 @@ namespace Fingersture;
 public partial class SignIn : ContentPage
 {
     private readonly DatabaseService dbService;
-    private string selectedImagePath;
     private string imagePath1;
-    private bool carregando = true;
+    private bool isLoading = true;
 
     public SignIn()
     {
         InitializeComponent();
         dbService = DatabaseService.Instance;
-        this.SizeChanged += OnPageSizeChanged;
     }
 
-    async Task<string> PickImageAsync()
+    private static async Task<string> PickImageAsync()
     {
         try
         {
             var result = await FilePicker.PickAsync(new PickOptions
             {
-                PickerTitle = "Escolha uma impressão digital",
+                PickerTitle = "Pick a fingerprint",
                 FileTypes = FilePickerFileType.Images
             });
 
@@ -42,20 +40,20 @@ public partial class SignIn : ContentPage
         }
     }
 
-    async Task<Mat> CreateMatchImage(Mat img1, Mat img2, List<DMatch> goodMatches, KeyPoint[] keypoints1, KeyPoint[] keypoints2)
+    async static Task<Mat> CreateMatchImage(Mat img1, Mat img2, List<DMatch> goodMatches, KeyPoint[] keypoints1, KeyPoint[] keypoints2)
     {
-        Mat matchImage = new Mat();
+        Mat matchImage = new();
         Cv2.DrawMatches(img1, keypoints1, img2, keypoints2, goodMatches, matchImage, flags: DrawMatchesFlags.NotDrawSinglePoints);
         return matchImage;
     }
 
-    async void OnSelectImage1Clicked(object sender, EventArgs e)
+    async void HandleSelectImage(object sender, EventArgs e)
     {
         imagePath1 = await PickImageAsync();
         if (!string.IsNullOrEmpty(imagePath1))
         {
             imagePath1 = System.IO.Path.GetFullPath(imagePath1);
-            LabelImage1.Text = $"Imagem 1: {System.IO.Path.GetFileName(imagePath1)}";
+            selectedImageLabel.Text = $"Image: {System.IO.Path.GetFileName(imagePath1)}";
             ButtonCompare.IsEnabled = true;
         }
     }
@@ -90,15 +88,14 @@ public partial class SignIn : ContentPage
             Cv2.DrawContours(img2, contours2, -1, new Scalar(255, 0, 0), 2);
 
             var sift = SIFT.Create();
-            KeyPoint[] keypoints1, keypoints2;
-            Mat descriptors1 = new Mat(), descriptors2 = new Mat();
-            sift.DetectAndCompute(img1, null, out keypoints1, descriptors1);
-            sift.DetectAndCompute(img2, null, out keypoints2, descriptors2);
+            Mat descriptors1 = new(), descriptors2 = new();
+            sift.DetectAndCompute(img1, null, out KeyPoint[] keypoints1, descriptors1);
+            sift.DetectAndCompute(img2, null, out KeyPoint[] keypoints2, descriptors2);
 
             var bf = new BFMatcher(NormTypes.L2, crossCheck: false);
             var matches = bf.KnnMatch(descriptors1, descriptors2, k: 2);
 
-            List<DMatch> goodMatches = new List<DMatch>();
+            List<DMatch> goodMatches = [];
             foreach (var match in matches)
             {
                 if (match[0].Distance < 0.75 * match[1].Distance)
@@ -116,7 +113,7 @@ public partial class SignIn : ContentPage
 
                 FullScreenImage.Source = ImageSource.FromFile(matchImagePath);
                 FullScreenImage.IsVisible = true;
-                MainContentLayout.IsVisible = false;
+                Form.IsVisible = false;
 
                 return true;
             }
@@ -124,7 +121,7 @@ public partial class SignIn : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Erro", $"Falha ao comparar as impressões digitais: {ex.Message}", "OK");
+            await DisplayAlert("Error", $"Failed to compare fingerprints: {ex.Message}", "OK");
             return false;
         }
     }
@@ -146,14 +143,14 @@ public partial class SignIn : ContentPage
 
     async void OnCompareFingerprintsClicked(object sender, EventArgs e)
     {
-        this.carregando = true;
-        loading();
+        this.isLoading = true;
+        Loading();
         await Task.Delay(1000);
         if (string.IsNullOrEmpty(EntryNome.Text))
         {
-            this.carregando = false;
-            loading();
-            await DisplayAlert("Erro", "Por favor, digite seu nome.", "OK");
+            this.isLoading = false;
+            Loading();
+            await DisplayAlert("Error", "Please, type your name.", "OK");
             return;
         }
 
@@ -162,18 +159,18 @@ public partial class SignIn : ContentPage
             var fingerprints = dbService.GetAllFingerprints();
             bool accessGranted = false;
 
-            foreach (var fingerprint in fingerprints)
+            foreach (var (ImagePath, Nome, Cargo) in fingerprints)
             {
-                if (fingerprint.Nome == EntryNome.Text)
+                if (Nome == EntryNome.Text)
                 {
-                    bool isMatch = await CompareFingerprintsAndShowMatches(imagePath1, fingerprint.ImagePath);
+                    bool isMatch = await CompareFingerprintsAndShowMatches(imagePath1, ImagePath);
                     if (isMatch)
                     {
                         accessGranted = true;
                         await Task.Delay(2000);
-                        await Navigation.PushAsync(new Home(EntryNome.Text, fingerprint.Cargo));
-                        this.carregando = false;
-                        loading();
+                        await Navigation.PushAsync(new Home(EntryNome.Text, Cargo));
+                        this.isLoading = false;
+                        Loading();
                         return;
                     }
                 }
@@ -181,22 +178,12 @@ public partial class SignIn : ContentPage
 
             if (!accessGranted)
             {
-                this.carregando = false;
-                loading();
-                await DisplayAlert("Acesso Negado!", "Impressão digital ou nome não encontrado no banco de dados.", "OK");
+                this.isLoading = false;
+                Loading();
+                await DisplayAlert("Access denied!", "Fingerprint or username not found in the database", "OK");
                 FullScreenImage.IsVisible = false;
             }
         }
-    }
-
-    private void OnPageSizeChanged(object sender, EventArgs e)
-    {
-        labelLogin.WidthRequest = this.Width * 0.8;
-        EntryNome.WidthRequest = this.Width * 0.8;
-        buttonSelecionar.WidthRequest = this.Width * 0.8;
-        LabelImage1.WidthRequest = this.Width * 0.8;
-        ButtonCompare.WidthRequest = this.Width * 0.8;
-        frameNome.WidthRequest = this.Width * 0.8;
     }
 
     private async void ImageButton_Clicked(object sender, EventArgs e)
@@ -204,17 +191,17 @@ public partial class SignIn : ContentPage
         await Navigation.PopAsync();
     }
 
-    void loading()
+    void Loading()
     {
-        if (carregando == true)
+        if (isLoading)
         {
-            carregandoView.IsVisible = true;
-            MainContentLayout.IsVisible = false;
+            loadingView.IsVisible = true;
+            Form.IsVisible = false;
             StartSpinnerAnimation();
         } else
         {
-            carregandoView.IsVisible = false;
-            MainContentLayout.IsVisible = true;
+            loadingView.IsVisible = false;
+            Form.IsVisible = true;
         }
     }
 

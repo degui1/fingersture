@@ -15,11 +15,11 @@
         </Grid.RowDefinitions>
 
         <Image
-        Source="nature.png"
-        WidthRequest="800"
-        HeightRequest="600"
-        Grid.Column="0"
-    />
+            Source="nature.png"
+            WidthRequest="800"
+            HeightRequest="600"
+            Grid.Column="0"
+        />
 
         <StackLayout VerticalOptions="Center" Grid.Column="1">
 

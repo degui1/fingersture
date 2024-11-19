@@ -30,7 +30,7 @@
 
             <StackLayout
                 VerticalOptions="Center"
-                x:Name="MainContentLayout"
+                x:Name="Form"
                 IsVisible="True"
                 Grid.Column="1"
             >
@@ -61,8 +61,8 @@
                         Grid.Row="0"
                     />
 
-                    <Label Text="Sign In"
-                       x:Name="labelLogin"
+                    <Label
+                       Text="Sign In"
                        FontSize="24"
                        FontAttributes="Bold"
                        TextColor="#EAEAEA"
@@ -71,7 +71,8 @@
                        MaximumWidthRequest="500"
                     />
 
-                    <Frame x:Name="frameNome"
+                    <Frame 
+                       x:Name="frameNome"
                        HasShadow="False"
                        BorderColor="Transparent"
                        CornerRadius="5"
@@ -91,7 +92,7 @@
                     <Button 
                         Text="Select fingerprint"
                         x:Name="buttonSelecionar"
-                        Clicked="OnSelectImage1Clicked"
+                        Clicked="HandleSelectImage"
                         BackgroundColor="#FF2E63"
                         TextColor="#EAEAEA"
                         BorderColor="Transparent"
@@ -100,7 +101,7 @@
                         FontAttributes="Bold"
                         MaximumWidthRequest="500" />
 
-                    <Label x:Name="LabelImage1"
+                    <Label x:Name="selectedImageLabel"
                        Text="Fingerprint: Empty"
                        FontSize="16"
                        Margin="0,0,0,20"
@@ -165,36 +166,35 @@
 
 
             </StackLayout>
+
+            <StackLayout 
+                x:Name="loadingView"
+                IsVisible="False"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Grid.Column="1">
+
+                <Label
+                    Text="Loading..."
+                    TextColor="#EAEAEA"
+                    Margin="0, 0, 0, 10"
+                    FontSize="20" />
+
+                <Ellipse
+                    WidthRequest="50"
+                    HeightRequest="50"
+                    StrokeThickness="5"
+                    StrokeDashArray="0, 1"
+                    x:Name="loaderCircle"
+                    Rotation="0">
+
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="#FF2E63" />
+                    </Ellipse.Fill>
+
+                </Ellipse>
+            </StackLayout>
         </Grid>
-
-        <StackLayout x:Name="carregandoView"
-                     IsVisible="False"
-                     VerticalOptions="Center"
-                     HorizontalOptions="Center">
-
-            <Label Text="Carregando..."
-                   TextColor="Black"
-                   Margin="0, 0, 0, 10"
-                   FontSize="20" />
-
-            <Ellipse WidthRequest="50"
-                     HeightRequest="50"
-                     StrokeThickness="5"
-                     StrokeDashArray="0, 1"
-                     x:Name="loaderCircle"
-                     Rotation="0"
-                     Stroke="Red">
-
-                <Ellipse.Fill>
-                    <SolidColorBrush Color="Green" />
-                </Ellipse.Fill>
-
-            </Ellipse>
-        </StackLayout>
-
-
-
-
     </StackLayout>
 
 
