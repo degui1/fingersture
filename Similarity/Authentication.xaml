@@ -37,7 +37,7 @@
                     FontSize="Header"
                 />
 
-                <Button x:Name="cadastroButton"
+                <Button x:Name="signUpButton"
                     Clicked="HandleSignUp"
                     Text="Sign Up"
                     Grid.Row="1"
@@ -50,7 +50,7 @@
                 />
 
                 <Button
-                    x:Name="loginButton"
+                    x:Name="signInButton"
                     Clicked="HandleSignIn"
                     Text="Sign In"
                     Grid.Row="2"

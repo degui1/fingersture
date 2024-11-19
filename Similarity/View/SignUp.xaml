@@ -39,7 +39,7 @@
                 </Grid.RowDefinitions>
 
                 <ImageButton Source="logoaps.png"
-                     Clicked="ImageButton_Clicked"
+                     Clicked="HandleAddImage"
                      WidthRequest="70"
                      HeightRequest="70"
                      HorizontalOptions="Start"
@@ -117,7 +117,7 @@
                 <Button
                     x:Name="ButtonAdicionar"
                     Text="Add fingerprint"
-                    Clicked="OnSelectImage1Clicked"
+                    Clicked="HandleImageSelection"
                     BackgroundColor="#FF2E63"
                     TextColor="#EAEAEA"
                     FontAttributes="Bold"
@@ -128,7 +128,7 @@
                 <Button
                     x:Name="ButtonCadastrar"
                     Text="Sign Up"
-                    Clicked="OnAddFingerprintClicked"
+                    Clicked="HandleAddFingerPrint"
                     IsEnabled="False"
                     BorderColor="Transparent"
                     FontAttributes="Bold"

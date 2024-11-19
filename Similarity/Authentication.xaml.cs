@@ -20,8 +20,8 @@
 
         private void HandlePageSizeChange(object sender, EventArgs e)
         {
-            cadastroButton.WidthRequest = this.Width * 0.8;
-            loginButton.WidthRequest = this.Width * 0.8;
+            signInButton.WidthRequest = this.Width * 0.8;
+            signUpButton.WidthRequest = this.Width * 0.8;
         }
 
     }
