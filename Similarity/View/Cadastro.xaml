@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Similarity.Cadastro"
+             Title="Sign Up"
+             BackgroundColor="#252A34">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Image
+            Source="signup.png"
+            WidthRequest="800"
+            HeightRequest="600"
+            Grid.Row="0"
+        />
+
+        <StackLayout 
+            VerticalOptions="Center"
+            Grid.Column="1">
+            
+            <Grid RowSpacing="15">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ImageButton Source="logoaps.png"
+                     Clicked="ImageButton_Clicked"
+                     WidthRequest="70"
+                     HeightRequest="70"
+                     HorizontalOptions="Start"
+                     VerticalOptions="Start"
+                     Margin="30,-60,0,0"
+                     BackgroundColor="#252A34"
+                     Grid.Row="0" />
+
+                <Label
+                   x:Name="labelCadastro"
+                   Text="Sign Up"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="#EAEAEA"
+                   Grid.Row="1"
+                   MaximumWidthRequest="500" />
+
+                <Frame
+                   x:Name="frameNome"
+                   HasShadow="False"
+                   BorderColor="Transparent"
+                   CornerRadius="5"
+                   Padding="0"
+                   Margin="0"
+                   BackgroundColor="#EAEAEA"
+                   Grid.Row="2"
+                   MaximumWidthRequest="500">
+                    <Entry x:Name="EntryNome"
+                       Placeholder="Type your name"
+                       FontSize="16"
+                       TextColor="#333"
+                       Grid.Row="2"
+                       MaximumWidthRequest="500" />
+                </Frame>
+
+                <Label
+                   x:Name="labelPicker"
+                   Text="Select your position"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="#EAEAEA"
+                   Grid.Row="3"
+                   MaximumWidthRequest="500" />
+
+
+                <Frame
+                   x:Name="framePicker"
+                   HasShadow="False"
+                   BorderColor="Transparent"
+                   CornerRadius="5"
+                   Padding="0"
+                   Margin="0"
+                   BackgroundColor="#EAEAEA"
+                   Grid.Row="4"
+                   MaximumWidthRequest="500">
+
+                    <Picker
+                        x:Name="CargoPicker"
+                        FontSize="20"
+                        Grid.Column="1"
+                        TextColor="Black"
+                        Grid.Row="4"
+                        TitleColor="black"
+                        MaximumWidthRequest="500">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Level 1</x:String>
+                                <x:String>Level 2</x:String>
+                                <x:String>Level 3</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Frame>
+
+                <Button
+                    x:Name="ButtonAdicionar"
+                    Text="Add fingerprint"
+                    Clicked="OnSelectImage1Clicked"
+                    BackgroundColor="#FF2E63"
+                    TextColor="#EAEAEA"
+                    FontAttributes="Bold"
+                    BorderColor="Transparent"
+                    Grid.Row="5"
+                    MaximumWidthRequest="500" />
+
+                <Button
+                    x:Name="ButtonCadastrar"
+                    Text="Sign Up"
+                    Clicked="OnAddFingerprintClicked"
+                    IsEnabled="False"
+                    BorderColor="Transparent"
+                    FontAttributes="Bold"
+                    Grid.Row="7"
+                    MaximumWidthRequest="500">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter
+                                Property="BackgroundColor"
+                                Value="#999" />
+                            <Setter
+                                Property="TextColor"
+                                Value="#555" />
+                            <Style.Triggers>
+                                <DataTrigger TargetType="Button"
+                                     Binding="{Binding IsEnabled, Source={x:Reference ButtonCadastrar}}"
+                                     Value="True">
+                                    <Setter 
+                                        Property="BackgroundColor"
+                                        Value="#FF2E63" />
+                                    <Setter
+                                        Property="TextColor"
+                                        Value="#EAEAEA" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                </Button>
+            </Grid>
+        </StackLayout>
+    </Grid>
+</ContentPage>

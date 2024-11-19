@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Similarity.MainPage"
+             Title="Fingersture"
+             BackgroundColor="#252A34">
+
+    <StackLayout VerticalOptions="Center">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Image Source="logo.png"
+                   WidthRequest="400"
+                   HeightRequest="300"
+                   Grid.Row="0"
+            />
+
+            <Grid
+                Grid.Column="2"
+                >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Label
+                    HorizontalOptions="Center"
+                    Text="Fingersture"    
+                    FontSize="Header"
+                />
+
+                <Button x:Name="cadastroButton"
+                    Clicked="HandleSignUp"
+                    Text="Sign Up"
+                    Grid.Row="1"
+                    Margin="0,20,0,0"
+                    BackgroundColor="#FF2E63"
+                    TextColor="#EAEAEA"
+                    FontSize="Medium"
+                    BorderColor="black"
+                    MaximumWidthRequest="400"
+                />
+
+                <Button
+                    x:Name="loginButton"
+                    Clicked="HandleSignIn"
+                    Text="Sign In"
+                    Grid.Row="2"
+                    Margin="0,20,0,0"
+                    BackgroundColor="#FF2E63"
+                    TextColor="#EAEAEA"
+                    FontSize="Medium"
+                    BorderColor="Transparent"
+                    MaximumWidthRequest="400"
+                />
+            </Grid>
+        </Grid>
+    </StackLayout>
+</ContentPage>

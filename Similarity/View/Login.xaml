@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Similarity.Login"
+             Title="Sign In"
+             BackgroundColor="#252A34">
+
+    <StackLayout VerticalOptions="Center">
+        <Image x:Name="FullScreenImage"
+               Aspect="AspectFill"
+               IsVisible="True"
+               AbsoluteLayout.LayoutBounds="0,0,1,1"
+               AbsoluteLayout.LayoutFlags="All" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Image
+                Source="undraw.png"
+                WidthRequest="800"
+                HeightRequest="600"
+                Grid.Row="0"
+            />
+
+            <StackLayout
+                VerticalOptions="Center"
+                x:Name="MainContentLayout"
+                IsVisible="True"
+                Grid.Column="1"
+            >
+
+                <Grid RowSpacing="10">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="*" />
+
+                    </Grid.RowDefinitions>
+
+                    <ImageButton
+                        x:Name="logo"
+                        Source="logoaps.png"
+                        Clicked="ImageButton_Clicked"
+                        WidthRequest="70"
+                        HeightRequest="70"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        Margin="30,-60,0,0"
+                        BackgroundColor="#252A34"
+                        Grid.Row="0"
+                    />
+
+                    <Label Text="Sign In"
+                       x:Name="labelLogin"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="#EAEAEA"
+                       Margin="0,0,0,20"
+                       Grid.Row="1"
+                       MaximumWidthRequest="500"
+                    />
+
+                    <Frame x:Name="frameNome"
+                       HasShadow="False"
+                       BorderColor="Transparent"
+                       CornerRadius="5"
+                       Padding="0"
+                       Margin="0"
+                       BackgroundColor="#EAEAEA"
+                       Grid.Row="2"
+                       MaximumWidthRequest="500">
+                        <Entry x:Name="EntryNome"
+                           Placeholder="Type your name"
+                           FontSize="16"
+                           TextColor="#333"
+                           Grid.Row="2"
+                           MaximumWidthRequest="500" />
+                    </Frame>
+
+                    <Button Text="Selecionar Digital"
+                        x:Name="buttonSelecionar"
+                        Clicked="OnSelectImage1Clicked"
+                        BackgroundColor="#FF2E63"
+                        TextColor="#EAEAEA"
+                        BorderColor="Transparent"
+                        Margin="0,0,0,20"
+                        Grid.Row="3"
+                        FontAttributes="Bold"
+                        MaximumWidthRequest="500" />
+
+                    <Label x:Name="LabelImage1"
+                       Text="Fingerprint: Empty"
+                       FontSize="16"
+                       Margin="0,0,0,20"
+                       TextColor="#EAEAEA"
+                       Grid.Row="4"
+                       MaximumWidthRequest="500" />
+
+                    <Button Text="Login"
+                        Clicked="OnCompareFingerprintsClicked"
+                        IsEnabled="False"
+                        x:Name="ButtonCompare"
+                        BorderColor="Transparent"
+                        Grid.Row="6"
+                        FontAttributes="Bold"
+                        MaximumWidthRequest="500">
+                        <Button.Triggers>
+                            <DataTrigger
+                                TargetType="Button"
+                                Binding="{Binding IsEnabled, Source={x:Reference ButtonCompare}}"
+                                Value="False">
+                                <Setter
+                                    Property="BackgroundColor"
+                                    Value="#999"
+                                />
+                                <Setter
+                                    Property="TextColor"
+                                    Value="#555"
+                                />
+                            </DataTrigger>
+
+                            <DataTrigger
+                                TargetType="Button"
+                                Binding="{Binding IsEnabled, Source={x:Reference ButtonCompare}}"
+                                Value="True">
+                                <Setter
+                                    Property="BackgroundColor"
+                                    Value="#FF2E63" />
+                                <Setter
+                                    Property="TextColor"
+                                    Value="#EAEAEA" />
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+
+
+                </Grid>
+
+                <Image x:Name="ImageSelected"
+                   AbsoluteLayout.LayoutBounds="0,0,1,1"
+                   AbsoluteLayout.LayoutFlags="All"
+                   Aspect="AspectFit" />
+
+                <Label x:Name="LabelResult"
+                   Text=""
+                   FontSize="20"
+                   TextColor="Green" />
+
+                <Label x:Name="SelectedImageNameLabel"
+                   FontSize="16"
+                 />
+
+
+            </StackLayout>
+        </Grid>
+
+        <StackLayout x:Name="carregandoView"
+                     IsVisible="False"
+                     VerticalOptions="Center"
+                     HorizontalOptions="Center">
+
+            <Label Text="Carregando..."
+                   TextColor="Black"
+                   Margin="0, 0, 0, 10"
+                   FontSize="20" />
+
+            <Ellipse WidthRequest="50"
+                     HeightRequest="50"
+                     StrokeThickness="5"
+                     StrokeDashArray="0, 1"
+                     x:Name="loaderCircle"
+                     Rotation="0"
+                     Stroke="Red">
+
+                <Ellipse.Fill>
+                    <SolidColorBrush Color="Green" />
+                </Ellipse.Fill>
+
+            </Ellipse>
+        </StackLayout>
+
+
+
+
+    </StackLayout>
+
+
+</ContentPage>
