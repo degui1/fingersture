@@ -17,7 +17,7 @@ public partial class SignUp : ContentPage
         {
             var result = await FilePicker.PickAsync(new PickOptions
             {
-                PickerTitle = "Pick a finger print",
+                PickerTitle = "Pick a fingerprint",
                 FileTypes = FilePickerFileType.Images
             });
 
@@ -39,7 +39,7 @@ public partial class SignUp : ContentPage
         if (!string.IsNullOrEmpty(imagePath1))
         {
             imagePath1 = System.IO.Path.GetFullPath(imagePath1);
-            await DisplayAlert("Success", "Finger print successfully added!", "OK");
+            await DisplayAlert("Success", "Fingerprint successfully added!", "OK");
             ValidateForm();
         }
     }
