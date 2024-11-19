@@ -1,6 +1,6 @@
-﻿using Similarity;
+﻿using Fingersture;
 
-namespace Similarity
+namespace Fingersture
 {
     public partial class App : Application
     {
@@ -8,7 +8,7 @@ namespace Similarity
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new Authentication());
             SQLitePCL.Batteries_V2.Init();
 
         }

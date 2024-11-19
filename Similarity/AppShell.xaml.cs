@@ -1,4 +1,4 @@
-﻿namespace Similarity
+﻿namespace Fingersture
 {
     public partial class AppShell : Shell
     {

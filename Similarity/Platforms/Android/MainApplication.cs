@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace Similarity
+namespace Fingersture
 {
     [Application]
     public class MainApplication : MauiApplication

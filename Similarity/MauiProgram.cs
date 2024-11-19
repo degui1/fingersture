@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Similarity
+namespace Fingersture
 {
     public static class MauiProgram
     {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Similarity.Login"
+             x:Class="Fingersture.SignIn"
              Title="Sign In"
              BackgroundColor="#252A34">
 
@@ -88,7 +88,8 @@
                            MaximumWidthRequest="500" />
                     </Frame>
 
-                    <Button Text="Selecionar Digital"
+                    <Button 
+                        Text="Select fingerprint"
                         x:Name="buttonSelecionar"
                         Clicked="OnSelectImage1Clicked"
                         BackgroundColor="#FF2E63"
@@ -107,7 +108,8 @@
                        Grid.Row="4"
                        MaximumWidthRequest="500" />
 
-                    <Button Text="Login"
+                    <Button
+                        Text="Sign in"
                         Clicked="OnCompareFingerprintsClicked"
                         IsEnabled="False"
                         x:Name="ButtonCompare"

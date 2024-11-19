@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Similarity
+namespace Fingersture
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

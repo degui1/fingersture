@@ -1,12 +1,12 @@
-namespace Similarity;
+namespace Fingersture;
 
-public partial class AcessoLiberado : ContentPage
+public partial class Home : ContentPage
 {
-    public AcessoLiberado(string nome, string cargo)
+	public Home(string nome, string cargo)
     {
         InitializeComponent();
         NomeLabel.Text = $"Nome: {nome}";
-        CargoLabel.Text = $"Cargo: {(cargo == "Nível 1" ? (cargo == "Nível 2" ? "Civil" : "Diretor de divisão") 
+        CargoLabel.Text = $"Cargo: {(cargo == "Nível 1" ? (cargo == "Nível 2" ? "Civil" : "Diretor de divisão")
             : "Ministro do meio ambiente")}";
         NavigationPage.SetHasBackButton(this, false);
         this.SizeChanged += OnPageSizeChanged;

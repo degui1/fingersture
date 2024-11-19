@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fingersture.Home"
+             Title="Access granted"
+             BackgroundColor="#252A34">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Image
+        Source="nature.png"
+        WidthRequest="800"
+        HeightRequest="600"
+        Grid.Column="0"
+    />
+
+        <StackLayout VerticalOptions="Center" Grid.Column="1">
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Label x:Name="labelAcesso"
+               Text="Access granted!"
+               TextColor="#EAEAEA"
+               FontSize="30"
+               Margin="0,0,0,30"
+               Grid.Row="1"
+               MaximumWidthRequest="400" />
+
+                <Label
+               x:Name="NomeLabel"
+               FontSize="20"
+               TextColor="#EAEAEA"
+               Grid.Row="2"
+               MaximumWidthRequest="400" />
+
+                <Label
+               x:Name="CargoLabel"
+               FontSize="20"
+               TextColor="#EAEAEA"
+               Margin="0,0,0,30"
+               Grid.Row="3"
+               MaximumWidthRequest="400" />
+
+                <Button x:Name="buttonBack"
+                Text="Exit"
+                BackgroundColor="#FF2E63"
+                TextColor="#EAEAEA"
+                FontAttributes="Bold"
+                BorderColor="Transparent"
+                Clicked="Button_Clicked"
+                Grid.Row="4"
+                MaximumWidthRequest="400" />
+            </Grid>
+        </StackLayout>
+    </Grid>
+</ContentPage>

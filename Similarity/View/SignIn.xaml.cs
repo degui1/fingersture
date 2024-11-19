@@ -4,16 +4,16 @@ using OpenCvSharp.Features2D;
 using Size = OpenCvSharp.Size;
 
 
-namespace Similarity;
+namespace Fingersture;
 
-public partial class Login : ContentPage
+public partial class SignIn : ContentPage
 {
     private readonly DatabaseService dbService;
     private string selectedImagePath;
     private string imagePath1;
     private bool carregando = true;
 
-    public Login()
+    public SignIn()
     {
         InitializeComponent();
         dbService = DatabaseService.Instance;
@@ -171,7 +171,7 @@ public partial class Login : ContentPage
                     {
                         accessGranted = true;
                         await Task.Delay(2000);
-                        await Navigation.PushAsync(new AcessoLiberado(EntryNome.Text, fingerprint.Cargo));
+                        await Navigation.PushAsync(new Home(EntryNome.Text, fingerprint.Cargo));
                         this.carregando = false;
                         loading();
                         return;

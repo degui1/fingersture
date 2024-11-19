@@ -1,8 +1,8 @@
-﻿namespace Similarity
+﻿namespace Fingersture
 {
-    public partial class MainPage : ContentPage
+    public partial class Authentication : ContentPage
     {
-        public MainPage()
+        public Authentication()
         {
             InitializeComponent();
             SizeChanged += HandlePageSizeChange;
@@ -10,12 +10,12 @@
 
         private async void HandleSignIn(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Login());
+            await Navigation.PushAsync(new SignIn());
         }
 
         private async void HandleSignUp(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Cadastro());
+            await Navigation.PushAsync(new SignUp());
         }
 
         private void HandlePageSizeChange(object sender, EventArgs e)

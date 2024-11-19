@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Similarity
+namespace Fingersture
 {
     public class Program
     {

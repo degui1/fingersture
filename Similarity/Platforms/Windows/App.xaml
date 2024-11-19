@@ -1,9 +1,9 @@
 ﻿<maui:MauiWinUIApplication
-    x:Class="Similarity.WinUI.App"
+    x:Class="Fingersture.WinUI.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:maui="using:Microsoft.Maui"
-    xmlns:local="using:Similarity.WinUI">
+    xmlns:local="using:Fingersture.WinUI">
     
 
 </maui:MauiWinUIApplication>

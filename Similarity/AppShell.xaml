@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell x:Class="Similarity.AppShell"
+<Shell x:Class="Fingersture.AppShell"
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:Similarity"
+       xmlns:local="clr-namespace:Fingersture"
        Shell.FlyoutBehavior="Disabled"
-       Title="Similarity">
+       Title="Fingersture">
+
+    <ShellContent Title="Authentication"
+                  ContentTemplate="{DataTemplate local:Authentication}"
+                  Route="Authentication" />
 
     <ShellContent Title="Home"
-                  ContentTemplate="{DataTemplate local:MainPage}"
-                  Route="MainPage" />
+                  ContentTemplate="{DataTemplate local:Home}"
+                  Route="Home" />
 
-    <ShellContent Title="AcessoLiberado"
-                  ContentTemplate="{DataTemplate local:AcessoLiberado}"
-                  Route="AcessoLiberado" />
+    <ShellContent Title="SignUp"
+                  ContentTemplate="{DataTemplate local:SignUp}"
+                  Route="SignUp" />
 
-    <ShellContent Title="Cadastro"
-                  ContentTemplate="{DataTemplate local:Cadastro}"
-                  Route="Cadastro" />
-
-    <ShellContent Title="Login"
-                  ContentTemplate="{DataTemplate local:Login}"
-                  Route="Login" />
+    <ShellContent Title="SignIn"
+                  ContentTemplate="{DataTemplate local:SignIn}"
+                  Route="SignIn" />
 
 </Shell>

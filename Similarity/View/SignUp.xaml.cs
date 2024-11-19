@@ -1,11 +1,11 @@
-namespace Similarity;
+namespace Fingersture;
 
-public partial class Cadastro : ContentPage
+public partial class SignUp : ContentPage
 {
     private readonly DatabaseService dbService;
     private string imagePath1;
 
-    public Cadastro()
+    public SignUp()
     {
         InitializeComponent();
         dbService = DatabaseService.Instance;
