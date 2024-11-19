@@ -4,9 +4,6 @@ Fingersture is an application to validate your fingerprint and granted access to
 
 It is a college project that aims to create a system that compares two fingerprints, one from the database, previously registered by the user on the registration page and the other at the time of login. If the two fingerprints are the same, the system must grant user access.
 
-### 👉 Links: 
-- Web: [here](https://ignite-call-degui1s-projects.vercel.app/)
-
 ## ▶ How to start project
 
 ### Visual Studio Installer
