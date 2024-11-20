@@ -9,7 +9,7 @@ namespace Fingersture;
 public partial class SignIn : ContentPage
 {
     private readonly DatabaseService dbService;
-    private string imagePath1;
+    private string fingerprintPath;
     private bool isLoading = true;
 
     public SignIn()
@@ -32,11 +32,11 @@ public partial class SignIn : ContentPage
             {
                 return result.FullPath;
             }
-            return null;
+            return "";
         }
         catch (Exception)
         {
-            return null;
+            return "";
         }
     }
 
@@ -49,21 +49,21 @@ public partial class SignIn : ContentPage
 
     async void HandleSelectImage(object sender, EventArgs e)
     {
-        imagePath1 = await PickImageAsync();
-        if (!string.IsNullOrEmpty(imagePath1))
+        fingerprintPath = await PickImageAsync();
+        if (!string.IsNullOrEmpty(fingerprintPath))
         {
-            imagePath1 = System.IO.Path.GetFullPath(imagePath1);
-            selectedImageLabel.Text = $"Image: {System.IO.Path.GetFileName(imagePath1)}";
-            ButtonCompare.IsEnabled = true;
+            fingerprintPath = System.IO.Path.GetFullPath(fingerprintPath);
+            selectedImageLabel.Text = $"Image: {System.IO.Path.GetFileName(fingerprintPath)}";
+            ValidateForm();
         }
     }
 
-    async Task<bool> CompareFingerprintsAndShowMatches(string imagePath1, string imagePath2)
+    async Task<bool> CompareFingerprintsAndShowMatches(string fingerprintPath, string sentFingerprint)
     {
         try
         {
-            Mat img1 = Cv2.ImRead(imagePath1, ImreadModes.Grayscale);
-            Mat img2 = Cv2.ImRead(imagePath2, ImreadModes.Grayscale);
+            Mat img1 = Cv2.ImRead(fingerprintPath, ImreadModes.Grayscale);
+            Mat img2 = Cv2.ImRead(sentFingerprint, ImreadModes.Grayscale);
 
             if (img1.Empty() || img2.Empty())
             {
@@ -126,19 +126,12 @@ public partial class SignIn : ContentPage
         }
     }
 
-    private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
-    {
-        ValidateForm();
-    }
-
-    private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
-    {
-        ValidateForm();
-    }
-
     private void ValidateForm()
     {
-        ButtonCompare.IsEnabled = !string.IsNullOrEmpty(EntryNome.Text) && !string.IsNullOrEmpty(imagePath1);
+        Boolean isInputNameEmpty = string.IsNullOrEmpty(InputName.Text);
+        Boolean isFingerprintPathEmpty = string.IsNullOrEmpty(fingerprintPath);
+
+        ButtonCompare.IsEnabled = !isInputNameEmpty && !isFingerprintPathEmpty;
     }
 
     async void OnCompareFingerprintsClicked(object sender, EventArgs e)
@@ -146,7 +139,7 @@ public partial class SignIn : ContentPage
         this.isLoading = true;
         Loading();
         await Task.Delay(1000);
-        if (string.IsNullOrEmpty(EntryNome.Text))
+        if (string.IsNullOrEmpty(InputName.Text))
         {
             this.isLoading = false;
             Loading();
@@ -154,21 +147,21 @@ public partial class SignIn : ContentPage
             return;
         }
 
-        if (!string.IsNullOrEmpty(imagePath1))
+        if (!string.IsNullOrEmpty(fingerprintPath))
         {
             var fingerprints = dbService.GetAllFingerprints();
             bool accessGranted = false;
 
-            foreach (var (ImagePath, Nome, Cargo) in fingerprints)
+            foreach (var (sentFingerprint, Nome, Cargo) in fingerprints)
             {
-                if (Nome == EntryNome.Text)
+                if (Nome == InputName.Text)
                 {
-                    bool isMatch = await CompareFingerprintsAndShowMatches(imagePath1, ImagePath);
+                    bool isMatch = await CompareFingerprintsAndShowMatches(fingerprintPath, sentFingerprint);
                     if (isMatch)
                     {
                         accessGranted = true;
                         await Task.Delay(2000);
-                        await Navigation.PushAsync(new Home(EntryNome.Text, Cargo));
+                        await Navigation.PushAsync(new Home(InputName.Text, Cargo));
                         this.isLoading = false;
                         Loading();
                         return;

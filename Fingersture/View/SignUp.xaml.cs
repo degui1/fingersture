@@ -3,7 +3,7 @@ namespace Fingersture;
 public partial class SignUp : ContentPage
 {
     private readonly DatabaseService dbService;
-    private string imagePath1;
+    private string fingetprintPath;
 
     public SignUp()
     {
@@ -25,20 +25,20 @@ public partial class SignUp : ContentPage
             {
                 return result.FullPath;
             }
-            return null;
+            return "";
         }
         catch (Exception)
         {
-            return null;
+            return "";
         }
     }
 
     private async void HandleImageSelection(object sender, EventArgs e)
     {
-        imagePath1 = await PickImageAsync();
-        if (!string.IsNullOrEmpty(imagePath1))
+        fingetprintPath = await PickImageAsync();
+        if (!string.IsNullOrEmpty(fingetprintPath))
         {
-            imagePath1 = System.IO.Path.GetFullPath(imagePath1);
+            fingetprintPath = System.IO.Path.GetFullPath(fingetprintPath);
             await DisplayAlert("Success", "Fingerprint successfully added!", "OK");
             ValidateForm();
         }
@@ -46,23 +46,27 @@ public partial class SignUp : ContentPage
 
     private void ValidateForm()
     {
-        registerButton.IsEnabled = !string.IsNullOrEmpty(EntryNome.Text) &&
-                                    positionPicker.SelectedItem != null &&
-                                    !string.IsNullOrEmpty(imagePath1);
+        Boolean isFingetPrintPathEmpty = string.IsNullOrEmpty(fingetprintPath);
+        Boolean isInputNameEmpty = string.IsNullOrEmpty(InputName.Text);
+        Boolean hasSelectedImage = positionPicker.SelectedItem != null;
+
+        registerButton.IsEnabled = hasSelectedImage &&
+                                    !isInputNameEmpty &&
+                                    !isFingetPrintPathEmpty;
     }
 
     private async void HandleAddFingerPrint(object sender, EventArgs e)
     {
-        string nome = EntryNome.Text;
-        string cargo = positionPicker.SelectedItem?.ToString();
+        string name = InputName.Text;
+        string position = positionPicker.SelectedItem?.ToString();
 
-        if (string.IsNullOrEmpty(imagePath1))
+        if (string.IsNullOrEmpty(fingetprintPath))
         {
             await DisplayAlert("Error", "Please, select an image.", "OK");
             return;
         }
 
-        dbService.AddFingerprint(imagePath1, nome, cargo);
+        dbService.AddFingerprint(fingetprintPath, name, position);
         await DisplayAlert("Success", "Successfully registered.", "OK");
         await Navigation.PopToRootAsync();
     }

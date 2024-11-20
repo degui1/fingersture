@@ -81,7 +81,7 @@
                        BackgroundColor="#EAEAEA"
                        Grid.Row="2"
                        MaximumWidthRequest="500">
-                        <Entry x:Name="EntryNome"
+                        <Entry x:Name="InputName"
                            Placeholder="Type your name"
                            FontSize="16"
                            TextColor="#333"
